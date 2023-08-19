@@ -1,6 +1,6 @@
 import types
 
-from bot.buttons.reply_button import phone_number
+from bot.buttons.reply_button import phone_number, main_menu_buttons
 from bot.dispatcher import bot, dp
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart, Text
