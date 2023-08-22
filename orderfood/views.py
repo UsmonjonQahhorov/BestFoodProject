@@ -1,66 +1,95 @@
-from django.db.models import Q
-from django.shortcuts import render
-from django.views.generic import TemplateView,CreateView,ListView,UpdateView,DeleteView,DetailView
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from orderfood.models import Order,Food
+from orderfood.serializers import OrderSerializer,FoodSerializer
+from rest_framework.exceptions import NotFound
+from rest_framework.decorators import api_view
 
-from orderfood.forms import OrderForm
-from orderfood.models import Order
+class OrderListView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request, *args, **kwargs):
+        queryset = Order.objects.all()
+        serializer = OrderSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = OrderSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+class OrderDetailView(APIView):
+    def get_object(self, pk):
+        try:
+            instance = Order.objects.get(pk=pk)
+            return instance
+        except Order.DoesNotExist as e:
+            raise NotFound(e)
+
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object(pk=kwargs.get("pk"))
+        serializer = OrderSerializer(instance)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object(pk=kwargs.get("pk"))
+        serializer = OrderSerializer(instance=instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object(pk=kwargs.get("pk"))
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class IndexView(TemplateView):
-    template_name = "base.html"
 
 
-class  OrderListView(ListView):
-    model = Order
-    template_name = "list.html"
-    context_object_name = "orders"
+class FoodListView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request, *args, **kwargs):
+        queryset = Food.objects.all()
+        serializer = FoodSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        status = self.request.GET.get('status')
-        search = self.request.GET.get('search')
-        order_id = self.request.GET.get('order_id')
+    def post(self, request, *args, **kwargs):
+        serializer = FoodSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
-        if search:
-            queryset = queryset.filter(
-                Q(total_price__contains = search)
-            )
-        if status:
-            queryset = queryset.filter(
-                status=status
-            )
-        if order_id:
-            queryset = queryset.filter(
-                order_id = order_id
-            )
-        return queryset
+@api_view(["DELETE"])
+def delete_category(request):
+    instance = FoodSerializer.objects.get()
 
-    def get_context_data(self,**kwargs):
-        context = super().get_context_data(**kwargs)
-        context['order'] = Order.objects.all()
-        context["search"] = self.request.GET.get("search","")
-        order_id = self.request.GET.get("order_id","")
-        context["status"] = self.request.GET.get("status")
+class FoodDetailView(APIView):
+    def get_object(self, pk):
+        try:
+            instance = Food.objects.get(pk=pk)
+            return instance
+        except Food.DoesNotExist as e:
+            raise NotFound(e)
 
-        if order_id:
-            order_id = int(order_id)
-        else:
-            order_id = 0
-        context["order_id"] = order_id
-        return context
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object(pk=kwargs.get("pk"))
+        serializer = FoodSerializer(instance)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-class  OrderCreateView(CreateView):
-    model = Order
-    form_class =OrderForm
-    template_name = "form.html"
-    success_url = "order/list"
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object(pk=kwargs.get("pk"))
+        serializer = FoodSerializer(instance=instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-class OrderUpdateView(UpdateView):
-    model = Order
-    form_class = OrderForm
-    template_name = "form.html"
-    success_url = "order/list"
-
-class OrderDetailView(DetailView):
-    model = Order
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object(pk=kwargs.get("pk"))
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
