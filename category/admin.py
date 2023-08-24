@@ -28,3 +28,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, CategoryAdmin)
+
+from category.models import Category
+
+admin.site.register(Category)

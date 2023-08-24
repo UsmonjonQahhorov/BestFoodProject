@@ -18,6 +18,7 @@ def first_name(obj):
 #     return queryset.update(is_active=False)
 
 
+from users.models import User, TgUser
 @admin.action(description="Send notification to selected users")
 def send_notification(modeladmin, request, queryset):
     print("queryset", queryset)
@@ -75,3 +76,6 @@ class TgUserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(TgUser, TgUserAdmin)
+
+admin.site.register(User)
+admin.site.register(TgUser)

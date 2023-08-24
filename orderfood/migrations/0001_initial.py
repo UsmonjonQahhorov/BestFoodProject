@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('delivered_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders_delivered', to='users.user')),
-                ('telegram_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders_telegram_user', to='users.tguser')),
+                ('telegram_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders_telegram_user', to='users.tgusers')),
             ],
             options={
                 'verbose_name': 'Order',
