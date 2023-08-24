@@ -1,13 +1,16 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from category.models import Category
+from orderfood.choices import StatusChoices
 from users.models import TgUser
 from users.models import User
 
-class StatusChoices(models.TextChoices):
-    PREPARING = "preparing", "Preparing"
-    DELIVERING = "delivering", "Delivering"
-    DELIVERED = "delivered", "Delivered"
+
+# class StatusChoices(models.TextChoices):
+#     PREPARING = "preparing", "Preparing"
+#     DELIVERING = "delivering", "Delivering"
+#     DELIVERED = "delivered", "Delivered"
+
 
 class Food(models.Model):
     name = models.CharField(max_length=50)
@@ -27,6 +30,7 @@ class Food(models.Model):
     def __str__(self):
         return self.name
 
+
 class Order(models.Model):
     total_price = models.FloatField()
     lat = models.DecimalField(max_digits=20, decimal_places=20)
@@ -42,9 +46,11 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
+        # ordering = [""]
 
     def __str__(self):
         return self.description
+
 
 class OrderFood(models.Model):
     order = models.ForeignKey(Order, related_name="order_foods", on_delete=models.CASCADE)
