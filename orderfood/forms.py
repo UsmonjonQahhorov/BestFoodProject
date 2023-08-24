@@ -9,8 +9,8 @@ class OrderForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "total_price" : forms.NumberInput(attrs={'class': 'form-control'}),
-            "lat" : forms.DecimalField(attrs={'class': 'form-control'}),
-            "lon": forms.DecimalField(attrs={'class': 'form-control'}),
+            "lat" : forms.TextInput(attrs={'class': 'form-control'}),
+            "lon": forms.TextInput(attrs={'class': 'form-control'}),
             "description" : forms.TextInput(attrs={'class': 'form-control'}),
             "telegram_user" : forms.Select(attrs={'class': 'form-control'}),
             "delivered_by" : forms.Select(attrs={'class': 'form-control'}),

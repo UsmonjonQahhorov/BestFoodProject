@@ -8,9 +8,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-11"><h5 class="mb-0">Department Information</h5></div>
+                            <div class="col-md-11"><h5 class="mb-0">Users Information</h5></div>
                             <div class="col-md-1">
-                                <a href="/departments/list/" class="btn btn-danger btn-sm">
+                                <a href="/users/list/" class="btn btn-danger btn-sm">
                                     <i class="fas fa-arrow-left"></i>
                                 </a>
                             </div>
@@ -19,26 +19,20 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <h6>Name</h6>
-                                <p>{{ departments.name }}</p>
+                                <h6>First Name</h6>
+                                <p>{{ users.firstname }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <h6>Head</h6>
-                                <p>{{ departments.head }}</p>
+                                <h6>Last Name</h6>
+                                <p>{{ users.lastname }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <h6>Description</h6>
-                                <p>{{ departments.description }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Branch</h6>
-                                <p>{{ departments.branch }}</p>
+                                <h6>Role</h6>
+                                <p>{{ users.role }}</p>
                             </div>
                         </div>
                     </div>

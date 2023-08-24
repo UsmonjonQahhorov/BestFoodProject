@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-later">
+                        <div class="col-md-12">
+                            <h5 class="">{% if object %}Edit {{ object.total_price }} {% else %}Add Order{% endif %}</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" autocomplete=off enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{ form.total_price.errors }}
+                                        <label class="form-control-label" for="{{ form.total_price.id_for_label }}">{{ form.total_price.label }}</label>
+                                        {{ form.total_price }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.lat.errors }}
+                                        <label class="form-control-label" for="{{ form.lat.id_for_label }}">{{ form.lat.label }}</label>
+                                        {{ form.lat }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.lon.errors }}
+                                        <label class="form-control-label" for="{{ form.lon.id_for_label }}">{{ form.lon.label }}</label>
+                                        {{ form.lon }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.description.errors }}
+                                        <label class="form-control-label" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+                                        {{ form.description }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.telegram_user.errors }}
+                                        <label class="form-control-label" for="{{ form.telegram_user.id_for_label }}">{{ form.telegram_user.label }}</label>
+                                        {{ form.telegram_user }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.delivered_by.errors }}
+                                        <label class="form-control-label" for="{{ form.delivered_by.id_for_label }}">{{ form.delivered_by.label }}</label>
+                                        {{ form.delivered_by }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.status.errors }}
+                                        <label class="form-control-label" for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+                                        {{ form.status }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.delivered_at.errors }}
+                                        <label class="form-control-label" for="{{ form.delivered_at.id_for_label }}">{{ form.delivered_at.label }}</label>
+                                        {{ form.delivered_at }}
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group text-left mb-0">
+                                        {% if object %}
+                                        <button class="btn btn-warning waves-effect waves-light mr-1" type="submit">
+                                            Save changes
+                                        </button>
+                                        {% else %}
+                                        <button class="btn btn-success waves-effect waves-light mr-1" type="submit">
+                                            Add
+                                        </button>
+                                        {% endif %}
+                                        <a href="{% url 'order-list' %}" class="btn btn-danger waves-effect waves-light">
+                                            Cancel
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
