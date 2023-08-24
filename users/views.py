@@ -23,7 +23,7 @@ from users.forms import UserForm,TgUserForm
 from users.models import User,TgUser
 
 class IndexView(TemplateView):
-    template_name = 'head.html'
+    template_name = 'role.html'
 
 
 class UsersListView(ListView):
@@ -36,16 +36,16 @@ class UsersListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search = self.request.GET.get('search')
-        head = self.request.GET.get('head')
+        role = self.request.GET.get('role')
         user_id = self.request.GET.get('user_id')
 
         if search:
             queryset = queryset.filter(
                 Q(name__contains = search) | Q(description__contains = search)
             )
-        if head:
+        if role:
             queryset = queryset.filter(
-                head = head
+                role = role
             )
         if user_id:
             queryset = queryset.filter(
@@ -107,16 +107,16 @@ class TgUsersListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search = self.request.GET.get('search')
-        head = self.request.GET.get('head')
+        role = self.request.GET.get('role')
         tgusers_id = self.request.GET.get('tgusers_id')
 
         if search:
             queryset = queryset.filter(
                 Q(name__contains = search) | Q(description__contains = search)
             )
-        if head:
+        if role:
             queryset = queryset.filter(
-                head = head
+                role = role
             )
         if tgusers_id:
             queryset = queryset.filter(

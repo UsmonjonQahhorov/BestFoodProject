@@ -12,7 +12,7 @@
                         </div>
                         <div class="ms-auto my-auto mt-lg-0 mt-4">
                             <div class="ms-auto my-auto">
-                                <a href="{% url 'category-create' %}" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Branch</a>
+                                <a href="{% url 'category-create' %}" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Category</a>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <tbody>
                                 {% for cat in category %}
                                 <tr>
-                                    <td class="text-center text-sm">{{ branch.name }}</td>
+                                    <td class="text-center text-sm">{{ cat.name }}</td>
                                     <td class="text-center text-sm">
                                         <a href="{% url 'category-detail' pk=cat.id %}" data-bs-toggle="tooltip"
                                            data-bs-original-title="Preview branch">
