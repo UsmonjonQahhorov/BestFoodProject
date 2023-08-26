@@ -30,7 +30,7 @@ from orderfood.forms import OrderForm,FoodForm
 from orderfood.models import Order
 
 class IndexView(TemplateView):
-    template_name = 'head.html'
+    template_name = 'index.html'
 
 
 class OrdersListView(ListView):

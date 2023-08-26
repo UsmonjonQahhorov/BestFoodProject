@@ -20,6 +20,22 @@ from django.views.generic import (
 from category.forms import CategoryForm
 from category.models import Category
 
+
+
+class AdminPanel(TemplateView):
+    template_name = 'index.html'
+
+class MenuPanel(TemplateView):
+    template_name = 'menu.html'
+
+class BookPanel(TemplateView):
+    template_name = 'book.html'
+
+class AboutPanel(TemplateView):
+    template_name = 'about.html'
+
+
+
 class IndexView(TemplateView):
     template_name = 'head.html'
 

@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from category.models import Category
-from orderfood.models import Food, Order, OrderFood
 
 
 # @admin.action(description="Set selected category active.")
@@ -28,7 +27,3 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, CategoryAdmin)
-
-from category.models import Category
-
-admin.site.register(Category)

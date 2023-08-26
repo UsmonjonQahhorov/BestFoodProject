@@ -76,6 +76,3 @@ class TgUserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(TgUser, TgUserAdmin)
-
-admin.site.register(User)
-admin.site.register(TgUser)

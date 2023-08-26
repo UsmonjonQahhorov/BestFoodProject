@@ -23,7 +23,7 @@ from users.forms import UserForm,TgUserForm
 from users.models import User,TgUser
 
 class IndexView(TemplateView):
-    template_name = 'role.html'
+    template_name = 'index.html'
 
 
 class UsersListView(ListView):

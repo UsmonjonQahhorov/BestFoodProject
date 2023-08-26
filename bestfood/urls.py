@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from category import views
 
 urlpatterns = [
     path('', include("category.urls")),
     path('', include("orderfood.urls")),
     path('', include("post.urls")),
     path('', include("users.urls")),
+    path("", views.BookPanel.as_view(), name="book-panel"),
+    path("", views.AboutPanel.as_view(), name="about-panel"),
+    path("", views.MenuPanel.as_view(), name="menu-panel"),
+    path('adminpanel/',views.AdminPanel.as_view(),name='admin-panel'),
     path('admin/', admin.site.urls),
 ]
