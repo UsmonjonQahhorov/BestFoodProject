@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -19,7 +20,7 @@ from django.views.generic import (
 
 from category.forms import CategoryForm
 from category.models import Category
-
+from orderfood.models import Food
 
 
 class AdminPanel(TemplateView):
@@ -33,7 +34,6 @@ class BookPanel(TemplateView):
 
 class AboutPanel(TemplateView):
     template_name = 'about.html'
-
 
 
 class IndexView(TemplateView):
@@ -80,6 +80,28 @@ class CategoryListView(ListView):
             category_id = 0
         context["category_id"] = category_id
 
+        return context
+
+
+class HomePanel(ListView):
+    model = Food
+    template_name = 'head.html'
+    context_object_name = "foods"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search = self.request.GET.get('search')
+
+        if search:
+            queryset = queryset.filter(
+                Q(name__contains = search)
+            )
+        return queryset
+
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search"] = self.request.GET.get("search","")
         return context
 
 

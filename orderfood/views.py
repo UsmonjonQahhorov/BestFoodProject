@@ -7,15 +7,7 @@ from orderfood.models import Order,Food
 from orderfood.serializers import OrderSerializer,FoodSerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view
-
-
-
-
-
 from django.shortcuts import render
-
-from django.shortcuts import render
-
 from django.shortcuts import get_object_or_404,redirect
 from django.db.models import Q
 from django.views.generic import (
@@ -31,6 +23,7 @@ from orderfood.models import Order
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
 
 
 class OrdersListView(ListView):

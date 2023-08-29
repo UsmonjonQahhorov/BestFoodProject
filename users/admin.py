@@ -1,7 +1,4 @@
 from django.contrib import admin
-from orderfood.models import Food, Order, OrderFood
-from users.models import User, TgUser
-
 
 # @admin.action(description="Set selected user active.")
 # def set_active(modeladmin, request, queryset):
