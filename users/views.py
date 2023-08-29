@@ -29,7 +29,7 @@ class TgUserViewSet(ModelViewSet):
 
 
 class IndexView(TemplateView):
-    template_name = 'role.html'
+    template_name = 'index.html'
 
 
 class UsersListView(ListView):
