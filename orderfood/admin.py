@@ -81,8 +81,3 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Food, FoodAdmin)
 admin.site.register(Order, OrderAdmin)
-from orderfood.models import Order, Food, OrderFood
-
-admin.site.register(Order)
-admin.site.register(Food)
-admin.site.register(OrderFood)

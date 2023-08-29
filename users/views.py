@@ -8,8 +8,7 @@ from users.serializers import UserSerializer, TgUserSerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view
 
-
-from django.shortcuts import get_object_or_404,redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.views.generic import (
     TemplateView,
@@ -18,9 +17,16 @@ from django.views.generic import (
     UpdateView,
     DetailView
 )
+from users.forms import UserForm, TgUserForm
+from users.models import User, TgUser
+from rest_framework.viewsets import ModelViewSet
+from users.serializers import TgUserSerializer
 
-from users.forms import UserForm,TgUserForm
-from users.models import User,TgUser
+
+class TgUserViewSet(ModelViewSet):
+    queryset = TgUser.objects.all()
+    serializer_class = TgUserSerializer
+
 
 class IndexView(TemplateView):
     template_name = 'role.html'
@@ -31,8 +37,6 @@ class UsersListView(ListView):
     template_name = 'user/list.html'
     context_object_name = "users"
 
-
-
     def get_queryset(self):
         queryset = super().get_queryset()
         search = self.request.GET.get('search')
@@ -41,23 +45,23 @@ class UsersListView(ListView):
 
         if search:
             queryset = queryset.filter(
-                Q(name__contains = search) | Q(description__contains = search)
+                Q(name__contains=search) | Q(description__contains=search)
             )
         if role:
             queryset = queryset.filter(
-                role = role
+                role=role
             )
         if user_id:
             queryset = queryset.filter(
-                user_id = user_id
+                user_id=user_id
             )
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["search"] = self.request.GET.get('search',"")
-        user_id = self.request.GET.get('user_id',"")
+        context["search"] = self.request.GET.get('search', "")
+        user_id = self.request.GET.get('user_id', "")
         if user_id:
             user_id = int(user_id)
         else:
@@ -73,36 +77,33 @@ class UsersCreateView(CreateView):
     success_url = '/users/list/'
     template_name = 'user/form.html'
 
+
 class UsersUpdateView(UpdateView):
     model = User
     form_class = UserForm
     success_url = '/users/list/'
     template_name = 'user/form.html'
 
+
 class UsersDetailView(DetailView):
     model = User
     template_name = 'user/detail.html'
     context_object_name = "users"
 
-def users_delete(request,pk):
-    users = get_object_or_404(User,pk=pk)
+
+def users_delete(request, pk):
+    users = get_object_or_404(User, pk=pk)
     users.delete()
     return redirect("users-list")
 
 
-
 # ======================================TgUser==================================
-
-
-
 
 
 class TgUsersListView(ListView):
     model = TgUser
     template_name = 'tgusers/list.html'
     context_object_name = "tgusers"
-
-
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -112,28 +113,28 @@ class TgUsersListView(ListView):
 
         if search:
             queryset = queryset.filter(
-                Q(name__contains = search) | Q(description__contains = search)
+                Q(name__contains=search) | Q(description__contains=search)
             )
         if role:
             queryset = queryset.filter(
-                role = role
+                role=role
             )
         if tgusers_id:
             queryset = queryset.filter(
-                tgusers_id = tgusers_id
+                tgusers_id=tgusers_id
             )
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["search"] = self.request.GET.get('search',"")
-        tgusers_id = self.request.GET.get('tgusers_id',"")
-        if tgusers_id:
-            tgusers_id = int(tgusers_id)
+        context["search"] = self.request.GET.get('search', "")
+        chat_id = self.request.GET.get('chat_id', "")                     #tgusers_id
+        if chat_id:
+            chat_id = int(chat_id)
         else:
-            tgusers_id = 0
-        context["tgusers_id"] = tgusers_id
+            chat_id = 0
+        context["chat_id"] = chat_id
 
         return context
 
@@ -144,34 +145,24 @@ class TgUsersCreateView(CreateView):
     success_url = '/tgusers/list/'
     template_name = 'tgusers/form.html'
 
+
 class TgUsersUpdateView(UpdateView):
     model = TgUser
     form_class = TgUserForm
     success_url = '/tgusers/list'
     template_name = 'tgusers/form.html'
 
+
 class TgUsersDetailView(DetailView):
     model = TgUser
     template_name = 'tgusers/detail.html'
     context_object_name = "tgusers"
 
-def tgusers_delete(request,pk):
-    tgusers = get_object_or_404(TgUser,pk=pk)
+
+def tgusers_delete(request, pk):
+    tgusers = get_object_or_404(TgUser, pk=pk)
     tgusers.delete()
     return redirect("tgusers-list")
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #
 # class UserListView(APIView):

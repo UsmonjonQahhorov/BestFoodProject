@@ -23,5 +23,9 @@ async def location_handler(msg: types.Message, state: FSMContext):
     lat = msg.location.latitude
     lon = msg.location.longitude
     location = geolocator.reverse((lat, lon), exactly_one=True)
-    await msg.answer(text=f"<b>Sizning manzilingiz: {location.row}</b>", parse_mode="HTML")
-    await state.finish()
+
+    if location:
+        address = location.raw.get('display_name', 'Unknown Address')
+        await msg.answer(text=f"<b>Sizning manzilingiz: {address}</b>", parse_mode="HTML")
+    else:
+        await msg.answer(text="<b>Manzil topilmadi</b>", parse_mode="HTML")

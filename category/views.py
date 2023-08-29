@@ -7,7 +7,7 @@ from category.models import Category
 from category.serializers import CategorySerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view
-from django.shortcuts import get_object_or_404,redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.views.generic import (
     TemplateView,
@@ -20,6 +20,7 @@ from django.views.generic import (
 from category.forms import CategoryForm
 from category.models import Category
 
+
 class IndexView(TemplateView):
     template_name = 'head.html'
 
@@ -29,8 +30,6 @@ class CategoryListView(ListView):
     template_name = 'category/list.html'
     context_object_name = "category"
 
-
-
     def get_queryset(self):
         queryset = super().get_queryset()
         search = self.request.GET.get('search')
@@ -39,15 +38,15 @@ class CategoryListView(ListView):
 
         if search:
             queryset = queryset.filter(
-                Q(name__contains = search) | Q(description__contains = search)
+                Q(name__contains=search) | Q(description__contains=search)
             )
         if head:
             queryset = queryset.filter(
-                head = head
+                head=head
             )
         if category_id:
             queryset = queryset.filter(
-                category_id = category_id
+                category_id=category_id
             )
         return queryset
 
@@ -56,8 +55,8 @@ class CategoryListView(ListView):
 
         context["category"] = Category.objects.all()
 
-        context["search"] = self.request.GET.get('search',"")
-        category_id = self.request.GET.get('category_id',"")
+        context["search"] = self.request.GET.get('search', "")
+        category_id = self.request.GET.get('category_id', "")
         if category_id:
             category_id = int(category_id)
         else:
@@ -73,22 +72,24 @@ class CategorysCreateView(CreateView):
     success_url = '/category/list/'
     template_name = 'category/form.html'
 
+
 class CategorysUpdateView(UpdateView):
     model = Category
     form_class = CategoryForm
     success_url = '/category/list'
     template_name = 'category/form.html'
 
+
 class CategorysDetailView(DetailView):
     model = Category
     template_name = 'category/detail.html'
     context_object_name = "category"
 
-def categorys_delete(request,pk):
-    categorys = get_object_or_404(Category,pk=pk)
+
+def categorys_delete(request, pk):
+    categorys = get_object_or_404(Category, pk=pk)
     categorys.delete()
     return redirect("category-list")
-
 
 # class CategoryListView(APIView):
 #     authentication_classes = [BasicAuthentication]
