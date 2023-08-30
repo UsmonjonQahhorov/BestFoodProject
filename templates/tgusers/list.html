@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-lg-flex">
+                        <div>
+                            <h5 class="mb-0">Professions List</h5>
+                        </div>
+                        <div class="ms-auto my-auto mt-lg-0 mt-4">
+                            <div class="ms-auto my-auto">
+                                <a href="{% url 'tgusers-create' %}" class="btn bg-gradient-primary btn-sm mb-0"
+                                   >+&nbsp; New TgUser</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-0">
+                    <div class="table-responsive">
+                        <table class="table table-flush" >
+                            <form method="get">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-center">
+                                            <input class="form-control" name="search" value="{{ search }}" placeholder="Search..." type="text">
+                                        </th>
+                                        <th class="text-center">
+                                            <select class="form-control" name="tgusers_id">
+                                                <option value="" {% if not tuser %}selected{% endif %}>---------</option>
+                                                {% for tuser in tgusers %}
+                                                <option value="{{ tuser.id }}" {% if tgusers_id == tuser.id %}selected{% endif %}>{{ tuser.fullname }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </th>
+
+                                        <th class="text-center">
+                                            <button type="submit" class="btn bg-gradient-primary btn-sm mb-0">Filter</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </form>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center" style="width: 30%;">Name</th>
+                                    <th class="text-center" style="width: 30%;">Phone Number</th>
+                                    <th class="text-center" style="width: 30%;">Is Blocked</th>
+                                    <th class="text-center" style="width: 10%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for tuser in tgusers %}
+                                <tr>
+                                    <td class="text-center text-sm">{{ tuser.fullname }}</td>
+                                    <td class="text-center text-sm">{{ tuser.phone_number }}</td>
+                                    <td class="text-center text-sm">{{ tuser.is_blocked }}</td>
+                                    <td class="text-center text-sm">
+                                        <a href="{% url 'tgusers-detail' pk=tuser.id %}" data-bs-toggle="tooltip"
+                                           data-bs-original-title="Preview tuser">
+                                            <i class="fas fa-eye text-secondary" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="{% url 'tgusers-update' pk=tuser.id%}" class="mx-3" data-bs-toggle="tooltip"
+                                           data-bs-original-title="Edit tuser">
+                                            <i class="fas fa-user-edit text-secondary" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="{% url 'tgusers-delete' pk=tuser.id%}" data-bs-toggle="tooltip"
+                                           data-bs-original-title="Delete tuser">
+                                            <i class="fas fa-trash text-secondary" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
