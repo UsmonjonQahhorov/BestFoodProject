@@ -16,6 +16,8 @@ def first_name(obj):
 
 
 from users.models import User, TgUser
+
+
 @admin.action(description="Send notification to selected users")
 def send_notification(modeladmin, request, queryset):
     print("queryset", queryset)
@@ -50,7 +52,7 @@ def fullname(obj):
 
 
 class TgUserAdmin(admin.ModelAdmin):
-    list_display = [fullname, 'fullname', 'phone_number', 'is_blocked']
+    list_display = [fullname, 'fullname', 'phone_number', 'chat_id', 'is_blocked']
     list_display_links = [fullname]
     search_fields = ['fullname', 'phone_number']
     list_filter = ['is_blocked']
