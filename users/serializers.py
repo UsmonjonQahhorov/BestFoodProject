@@ -29,6 +29,7 @@ class TgUserSerializer(serializers.ModelSerializer):
             from_='+19285698468',
             to='+998998787323'
         )
+        print("hi barbie")
 
         print(message.body)
 
