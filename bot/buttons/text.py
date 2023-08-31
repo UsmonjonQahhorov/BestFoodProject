@@ -1,2 +1,2 @@
 back = "Orqaga"
-order = "Buyurnta berish"
+order = "Buyurtma berish"

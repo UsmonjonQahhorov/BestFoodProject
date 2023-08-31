@@ -4,9 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from users.models import User, TgUser
-from users.serializers import UserSerializer, TgUserSerializer
+from users.serializers import UserSerializer, TgUserSerializer, SmsVerificationSerializer
 from rest_framework.exceptions import NotFound
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
@@ -26,6 +26,24 @@ from users.serializers import TgUserSerializer
 class TgUserViewSet(ModelViewSet):
     queryset = TgUser.objects.all()
     serializer_class = TgUserSerializer
+
+    def get_serializer_class(self):
+        if self.action == "verify":
+            return SmsVerificationSerializer
+        return self.serializer_class
+
+    @action(detail=False, methods=["POST"])
+    def verify(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        chat_id = serializer.data.get("chat_id")
+        code = serializer.data.get("code")
+        tu = TgUser.objects.get(chat_id=chat_id)
+        if tu.sms == code:
+            tu.is_verified = True
+            tu.save()
+            return Response(status=200)
+        return Response(status=400)
 
 
 class IndexView(TemplateView):
@@ -129,7 +147,7 @@ class TgUsersListView(ListView):
         context = super().get_context_data(**kwargs)
 
         context["search"] = self.request.GET.get('search', "")
-        chat_id = self.request.GET.get('chat_id', "")                     #tgusers_id
+        chat_id = self.request.GET.get('chat_id', "")  # tgusers_id
         if chat_id:
             chat_id = int(chat_id)
         else:

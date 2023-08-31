@@ -37,9 +37,8 @@ class TgUser(models.Model):
     def __str__(self):
         return f"{self.fullname}"
 
+
 class Sms(models.Model):
     sms = models.CharField(max_length=6)
     telegram_user = models.ForeignKey(TgUser, related_name="tu_sms", on_delete=models.CASCADE)
     is_used = models.BooleanField(default=False)
-
-

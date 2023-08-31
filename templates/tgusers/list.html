@@ -47,6 +47,8 @@
                                     <th class="text-center" style="width: 30%;">Name</th>
                                     <th class="text-center" style="width: 30%;">Phone Number</th>
                                     <th class="text-center" style="width: 30%;">Is Blocked</th>
+                                    <th class="text-center" style="width: 10%;">Chat_Id</th>
+                                    <th class="text-center" style="width: 10%;">Username</th>
                                     <th class="text-center" style="width: 10%;">Action</th>
                                 </tr>
                             </thead>
@@ -56,6 +58,8 @@
                                     <td class="text-center text-sm">{{ tuser.fullname }}</td>
                                     <td class="text-center text-sm">{{ tuser.phone_number }}</td>
                                     <td class="text-center text-sm">{{ tuser.is_blocked }}</td>
+                                    <td class="text-center text-sm">{{ tuser.chat_id }}</td>
+                                    <td class="text-center text-sm">{{ tuser.username }}</td>
                                     <td class="text-center text-sm">
                                         <a href="{% url 'tgusers-detail' pk=tuser.id %}" data-bs-toggle="tooltip"
                                            data-bs-original-title="Preview tuser">

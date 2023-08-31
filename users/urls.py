@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from users.views import TgUserViewSet
 
 router = DefaultRouter()
-router.register("telegram_users", TgUserViewSet, basename="telegram-users")
+router.register("telegram_users", TgUserViewSet, basename="telegram_users")
 
 
 urlpatterns = [
