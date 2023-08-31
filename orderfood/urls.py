@@ -1,5 +1,15 @@
 from django.urls import path
 from orderfood import views
+from orderfood.views import FoodViewSet, OrderViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register("food_list", FoodViewSet, basename="food_list")
+
+
+router = DefaultRouter()
+router.register("order_list", OrderViewSet, basename="order_list")
+
 
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
@@ -13,7 +23,7 @@ urlpatterns = [
     path("food/<int:pk>/detail/", views.FoodsDetailView.as_view(), name="food-detail"),
     path("food/<int:pk>/update/", views.FoodsUpdateView.as_view(), name="food-update"),
     path("food/<int:pk>/delete/", views.foods_delete, name="food-delete"),
-]
+] + router.urls
 
 # urlpatterns = [
 #     path('order/', OrderListView.as_view(), name='orders'),
