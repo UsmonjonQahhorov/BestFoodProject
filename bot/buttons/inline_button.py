@@ -1,13 +1,16 @@
 from aiogram.types import InlineKeyboardMarkup,InlineKeyboardButton
+import requests
 
-category =
 
 
 async def pubg_prices_buttons():
     design = []
-    for i in pubg_mobile_prices:
-        for i in i.items():
-            key = f"{i[0]} -> {i[1]}"
-            value = i[1]
-        design.append([InlineKeyboardButton(text=key, callback_data=value)])
+    category = requests.get(f"http://127.0.0.1:8000/category_list/")
+    user_response = category.json()
+    for i in user_response:
+        design.append(i.get('name'))
+
+    for i in design:
+        key = i
+        design.append([InlineKeyboardButton(text=key, callback_data=key)])
     return InlineKeyboardMarkup(inline_keyboard=design, resize_keyboard=True)
