@@ -21,20 +21,28 @@ from django.views.generic import (
 from category.forms import CategoryForm
 from category.models import Category
 from orderfood.models import Food
+from rest_framework.viewsets import ModelViewSet
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
 class AdminPanel(TemplateView):
     template_name = 'index.html'
 
+
 class MenuPanel(TemplateView):
     template_name = 'menu.html'
+
 
 class BookPanel(TemplateView):
     template_name = 'book.html'
 
+
 class AboutPanel(TemplateView):
     template_name = 'about.html'
-
 
 
 class IndexView(TemplateView):
@@ -93,14 +101,13 @@ class HomePanel(ListView):
 
         if search:
             queryset = queryset.filter(
-                Q(name__contains = search)
+                Q(name__contains=search)
             )
         return queryset
 
-
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search"] = self.request.GET.get("search","")
+        context["search"] = self.request.GET.get("search", "")
         return context
 
 

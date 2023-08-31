@@ -43,8 +43,6 @@ async def register_handler(msg: types.Message, state: FSMContext):
 @dp.message_handler(state='phone', content_types=types.ContentTypes.CONTACT)
 async def phone(msg: types.Message, state: FSMContext):
     number = msg.contact.phone_number
-
-
     async with state.proxy() as data:
         username = data['username']
         fullname = data['fullname']
