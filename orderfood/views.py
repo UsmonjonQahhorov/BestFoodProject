@@ -20,6 +20,20 @@ from django.views.generic import (
 
 from orderfood.forms import OrderForm,FoodForm
 from orderfood.models import Order
+from rest_framework.viewsets import  ModelViewSet
+
+
+
+class FoodViewSet(ModelViewSet):
+    queryset = Food.objects.all()
+    serializer_class = FoodSerializer
+
+
+class OrderViewSet(ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
