@@ -144,29 +144,24 @@
 
   <!-- book section -->
   <section class="book_section layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Create  Category
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form_container">
-            <form action="">
-                <div>
-                    <input type="text" class="form-control" placeholder="Category Name">
+      <div class="card-header pb-0">
+                    <div class="d-lg-flex">
+                        <div>
+                            <div class="ms-auto my-auto mt-lg-0 mt-4">
+                            <div class="ms-auto my-auto">
+                                <a href="{% url 'admin-panel' %}" class="btn bg-gradient-primary btn-sm mb-0">&nbsp; Main Menu</a>
+                            </div>
+                            <h5 class="mb-0">Category List</h5>
+                        </div>
+
+                        </div>
+                        <div class="ms-auto my-auto mt-lg-0 mt-4">
+                            <div class="ms-auto my-auto">
+                                <a href="{% url 'category-create' %}" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Category</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="btn_box">
-                    <button>
-                        Add
-                    </button>
-                </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
   <!-- end book section -->
 

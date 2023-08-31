@@ -30,7 +30,10 @@ class MenuPanel(TemplateView):
     template_name = 'menu.html'
 
 class BookPanel(TemplateView):
-    template_name = 'book.html'
+    template_name = 'test.html'
+
+class Home(TemplateView):
+    template_name = 'head.html'
 
 class AboutPanel(TemplateView):
     template_name = 'about.html'
@@ -42,7 +45,7 @@ class IndexView(TemplateView):
 
 class CategoryListView(ListView):
     model = Category
-    template_name = 'category/list.html'
+    template_name = 'book.html'
     context_object_name = "category"
 
 

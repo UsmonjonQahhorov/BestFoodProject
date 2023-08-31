@@ -26,6 +26,7 @@ urlpatterns = [
                   path('', include("orderfood.urls")),
                   path('', include("post.urls")),
                   path('', include("users.urls")),
+                  path("home/", views.Home.as_view(), name="home"),
                   path("book/", views.BookPanel.as_view(), name="book-panel"),
                   path("about/", views.AboutPanel.as_view(), name="about-panel"),
                   path("menu/", views.MenuPanel.as_view(), name="menu-panel"),
