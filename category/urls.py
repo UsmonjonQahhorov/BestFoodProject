@@ -1,9 +1,9 @@
+from category.views import CategoryViewSet
 from django.urls import path
 from category import views
 from rest_framework.routers import DefaultRouter
 
-from orderfood.views import Foods
-
+from category.views import CategoryViewSet
 router = DefaultRouter()
 router.register("category_list", CategoryViewSet, basename="category_getlist")
 

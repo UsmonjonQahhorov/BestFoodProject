@@ -37,9 +37,10 @@
                                         </th>
                                         <th class="text-center">
                                             <select class="form-control" name="role">
-                                                <option value=""{% if not gender %}selected{% endif %}>-------------</option>
-                                                <option value="male" {% if gender == 'male' %}selected{% endif %} >Male</option>
-                                                <option value="female" {% if gender == 'female' %}selected{% endif %}>Female</option>
+                                                <option value=""{% if not role %}selected{% endif %}>-------------</option>
+                                                <option value="operator" {% if role == 'operator' %}selected{% endif %} >Operator</option>
+                                                <option value="admin" {% if role == 'admin' %}selected{% endif %}>Admin</option>
+                                                <option value="deliver" {% if role == 'deliver' %}selected{% endif %}>Deliver</option>
                                             </select>
                                         </th>
 

@@ -17,7 +17,7 @@ async def category_buttons():
 
 async def food_buttons():
     response = []
-    food = requests.get(f"http://127.0.0.1:8000/food_list/")
+    food = requests.get(f"http://127.0.0.1:8000/food_list")
     food_response = food.json()
     for i in food_response:
         response.append(i.get('name'))

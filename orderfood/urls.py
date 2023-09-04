@@ -4,11 +4,11 @@ from orderfood.views import FoodViewSet, OrderViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register("food_list", FoodViewSet, basename="food_list")
+router.register("food_list", FoodViewSet, basename="food_getlist")
 
 
 router = DefaultRouter()
-router.register("order_list", OrderViewSet, basename="order_list")
+router.register("order_list", OrderViewSet, basename="order_getlist")
 
 
 urlpatterns = [

@@ -33,9 +33,6 @@ class AdminPanel(TemplateView):
     template_name = 'index.html'
 
 
-class MenuPanel(TemplateView):
-    template_name = 'menu.html'
-
 
 class BookPanel(TemplateView):
     template_name = 'test.html'

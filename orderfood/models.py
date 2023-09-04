@@ -16,7 +16,7 @@ class Food(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.FloatField()
-    image = models.ImageField(upload_to='foods/')  # Example path, adjust as needed
+    image = models.ImageField(upload_to='media/food_images/')  # Example path, adjust as needed
     category = models.ForeignKey(Category, related_name="category_foods", on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -33,8 +33,8 @@ class Food(models.Model):
 
 class Order(models.Model):
     total_price = models.FloatField()
-    lat = models.DecimalField(max_digits=20, decimal_places=20)
-    lon = models.DecimalField(max_digits=20, decimal_places=20)
+    lat = models.DecimalField(max_digits=9, decimal_places=6)
+    lon = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.TextField()
     telegram_user = models.ForeignKey(TgUser, related_name="orders_telegram_user", on_delete=models.CASCADE)
     delivered_by = models.ForeignKey(User, related_name="orders_delivered", on_delete=models.CASCADE)
