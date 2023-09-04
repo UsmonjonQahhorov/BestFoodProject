@@ -5,7 +5,7 @@ from aiogram.types import ContentType
 from geopy import Nominatim
 import requests
 
-from bot.buttons.inline_button import category_buttons
+from bot.buttons.inline_button import category_buttons, food_buttons
 from bot.buttons.reply_button import location
 from bot.buttons.text import order
 from bot.dispatcher import dp
@@ -15,19 +15,18 @@ geolocator = Nominatim(user_agent="myGeocoder")
 
 @dp.message_handler(Text(order))
 async def category_create(msg: types.Message, state: FSMContext):
-    print("HI")
-
     await msg.answer(text="<i>Buyurtmani davom ettirish uchun iltimos categoryalardan birini tanlang👇</i>",
                      parse_mode="HTML",
                      reply_markup=await category_buttons())
     await state.set_state("category")
 
 
-@dp.message_handler(Text("Ovqatler"))
-async def ovqatlar_listi(msg: types.Message, state: FSMContext):
-    print("HI")
-
-
+@dp.callback_query_handler(Text("Ovqatlar"), state="category")
+async def what_delete_handler(call: types.CallbackQuery, state: FSMContext):
+    print("hi")
+    await call.message.answer(f"<b>Ovqatlar royhati🥘\n"
+                              "Ovqatlardan birini tanlang👇</b>", parse_mode="HTML",
+                              reply_markup=await food_buttons())
 
 
 

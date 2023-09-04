@@ -28,6 +28,8 @@ class PostListView(APIView):
 @api_view(["DELETE"])
 def delete_category(request):
     instance = PostSerializer.objects.get()
+
+
 from django.shortcuts import render
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -38,7 +40,6 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view
 from post.models import Post
-
 
 
 class PostDetailView(APIView):
@@ -65,6 +66,8 @@ class PostDetailView(APIView):
         instance = self.get_object(pk=kwargs.get("pk"))
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class PostListView(APIView):
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]

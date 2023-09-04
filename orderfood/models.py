@@ -16,7 +16,7 @@ class Food(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.FloatField()
-    image = models.ImageField(upload_to='foods/')  # Example path, adjust as needed
+    image = models.ImageField(upload_to='food_images/')  # Example path, adjust as needed
     category = models.ForeignKey(Category, related_name="category_foods", on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

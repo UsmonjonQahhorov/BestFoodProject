@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -18,7 +17,8 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('content', models.TextField()),
                 ('image', models.ImageField(upload_to='')),
-                ('status', models.CharField(choices=[('available', 'Available'), ('unavailable', 'Unavailable')], max_length=50)),
+                ('status',
+                 models.CharField(choices=[('available', 'Available'), ('unavailable', 'Unavailable')], max_length=50)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now_add=True)),
             ],
