@@ -6,7 +6,7 @@ from bot.buttons.reply_button import phone_number, main_menu_buttons
 from bot.dispatcher import dp
 
 
-@dp.message_handler(CommandStart())
+@dp.message_handler(CommandStart(), state="*")
 async def start_handler(msg: types.Message, state: FSMContext):
     user_id = str(msg.from_user.id)
     users = requests.get(f"http://127.0.0.1:8000/telegram_users/")
@@ -52,7 +52,7 @@ async def phone(msg: types.Message, state: FSMContext):
               'fullname': fullname,
               'username': username,
               'phone_number': msg.contact.phone_number})
-    print(response.status_code, response.json())
+    # print(response.status_code, response.json())
     await msg.answer("Telefon raqam muvaffaqiyatli saqlandi!")
     await msg.answer("Quyidigilardan birini tanlang!", reply_markup=await main_menu_buttons())
     await state.set_state('buyurtma berish')

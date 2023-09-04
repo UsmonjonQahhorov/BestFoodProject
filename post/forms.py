@@ -8,11 +8,11 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = "__all__"
         widgets = {
-            "title" : forms.TextInput(attrs={"class":"form-control"}),
-            "content" : forms.TextInput(attrs={"class":"form-control"}),
-            "image" : forms.ImageField(attrs={"class":"form-control"}),
-            "status" : forms.Select(attrs={"class":"form-control"}),
-            "created_at" : forms.DateInput(attrs={"class":"form-control"}),
-            "updated_at" : forms.DateInput(attrs={"class":"form-control"})
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "content": forms.TextInput(attrs={"class": "form-control"}),
+            "image": forms.ImageField(attrs={"class": "form-control"}),
+            "status": forms.Select(attrs={"class": "form-control"}),
+            "created_at": forms.DateInput(attrs={"class": "form-control"}),
+            "updated_at": forms.DateInput(attrs={"class": "form-control"})
 
         }
