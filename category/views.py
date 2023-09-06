@@ -35,7 +35,7 @@ class AdminPanel(TemplateView):
 
 
 class BookPanel(TemplateView):
-    template_name = 'test.html'
+    template_name = 'menu.html'
 
 class Home(TemplateView):
     template_name = 'head.html'
@@ -51,7 +51,7 @@ class IndexView(TemplateView):
 
 class CategoryListView(ListView):
     model = Category
-    template_name = 'book.html'
+    template_name = 'category/list.html'
     context_object_name = "category"
 
     def get_queryset(self):
@@ -95,20 +95,12 @@ class HomePanel(ListView):
     template_name = 'head.html'
     context_object_name = "foods"
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        search = self.request.GET.get('search')
 
-        if search:
-            queryset = queryset.filter(
-                Q(name__contains=search)
-            )
-        return queryset
+class MenuPanel(ListView):
+    model = Food
+    template_name = 'menu.html'
+    context_object_name = "foods"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["search"] = self.request.GET.get("search", "")
-        return context
 
 
 class CategorysCreateView(CreateView):

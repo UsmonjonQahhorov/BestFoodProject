@@ -61,15 +61,15 @@
                                     <td class="text-center text-sm">{{ food.is_active }}</td>
                                     <td class="text-center text-sm">
                                         <a href="{% url 'food-detail' pk=food.id %}" data-bs-toggle="tooltip"
-                                           data-bs-original-title="Preview student">
+                                           data-bs-original-title="Preview food">
                                             <i class="fas fa-eye text-secondary" aria-hidden="true"></i>
                                         </a>
                                         <a href="{% url 'food-update' pk=food.id %}" class="mx-3" data-bs-toggle="tooltip"
-                                           data-bs-original-title="Edit student">
+                                           data-bs-original-title="Edit food">
                                             <i class="fas fa-user-edit text-secondary" aria-hidden="true"></i>
                                         </a>
                                         <a href="{% url 'food-delete' pk=food.id %}" data-bs-toggle="tooltip"
-                                           data-bs-original-title="Delete student">
+                                           data-bs-original-title="Delete food">
                                             <i class="fas fa-trash text-secondary" aria-hidden="true"></i>
                                         </a>
                                     </td>

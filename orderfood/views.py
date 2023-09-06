@@ -3,11 +3,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from orderfood.models import Order,Food
+from orderfood.models import Order, Food, Basket
 from orderfood.serializers import OrderSerializer,FoodSerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404,redirect
 from django.db.models import Q
 from django.views.generic import (
@@ -21,6 +22,10 @@ from django.views.generic import (
 from orderfood.forms import OrderForm,FoodForm
 from orderfood.models import Order
 from rest_framework.viewsets import  ModelViewSet
+
+# ==============================Basket===================================
+
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -168,7 +173,7 @@ class FoodsDetailView(DetailView):
 def foods_delete(request,pk):
     foods = get_object_or_404(Food,pk=pk)
     foods.delete()
-    return redirect("foods-list")
+    return redirect("food-list")
 
 
 

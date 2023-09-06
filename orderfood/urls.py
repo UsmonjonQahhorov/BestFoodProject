@@ -23,7 +23,11 @@ urlpatterns = [
     path("food/<int:pk>/detail/", views.FoodsDetailView.as_view(), name="food-detail"),
     path("food/<int:pk>/update/", views.FoodsUpdateView.as_view(), name="food-update"),
     path("food/<int:pk>/delete/", views.foods_delete, name="food-delete"),
+    path('basket/add/', views.food_add_baskets, name='add_baskets'),
+    path('savatcha/', views.show_basket, name='show_basket'),
+
 ] + router.urls
+
 
 # urlpatterns = [
 #     path('order/', OrderListView.as_view(), name='orders'),

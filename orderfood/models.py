@@ -16,7 +16,7 @@ class Food(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.FloatField()
-    image = models.ImageField(upload_to='media/food_images/')  # Example path, adjust as needed
+    image = models.ImageField(upload_to='media/media/food_images/')  # Example path, adjust as needed
     category = models.ForeignKey(Category, related_name="category_foods", on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -59,3 +59,12 @@ class OrderFood(models.Model):
     price = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Basket(models.Model):
+    user = models.ForeignKey(User, related_name="user_basket", on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, related_name="food_basket", on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.user.firstname}'ning savatchasi"
