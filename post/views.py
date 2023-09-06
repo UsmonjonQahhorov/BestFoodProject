@@ -3,6 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
+from category.models import Category
 from post.models import Post
 from post.serializers import PostSerializer
 from rest_framework.exceptions import NotFound
@@ -26,21 +28,20 @@ class PostListView(APIView):
 
 
 @api_view(["DELETE"])
-def delete_category(request):
-    instance = PostSerializer.objects.get()
+def delete_category(request, category_id):
+    try:
+        category = Category.objects.get(pk=category_id)
+    except Category.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
+    category.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
-from django.shortcuts import render
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
-from post.serializers import PostSerializer
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.exceptions import NotFound
-from rest_framework.decorators import api_view
-from post.models import Post
-
+# @api_view(["DELETE"])
+# def delete_category(request):
+#     instance = PostSerializer.objects.get()
+#     instance.delete()
+#     return instance
 
 class PostDetailView(APIView):
     def get_object(self, pk):

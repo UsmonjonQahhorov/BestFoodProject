@@ -59,12 +59,3 @@ class OrderFood(models.Model):
     price = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
-class Basket(models.Model):
-    user = models.ForeignKey(User, related_name="user_basket", on_delete=models.CASCADE)
-    food = models.ForeignKey(Food, related_name="food_basket", on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f"{self.user.firstname}'ning savatchasi"

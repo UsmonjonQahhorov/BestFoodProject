@@ -1,11 +1,13 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
-from bot.buttons.text import back, order
+from bot.buttons.text import back, order, menu, orders, savat, about
 
 
 async def main_menu_buttons():
     design = [
-        [order]
+        [menu, orders],
+        [savat],
+        [about]
     ]
     return ReplyKeyboardMarkup(keyboard=design, resize_keyboard=True)
 
