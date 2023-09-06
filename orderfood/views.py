@@ -37,6 +37,12 @@ class FoodViewSet(ModelViewSet):
     serializer_class = FoodSerializer
 
 
+class OrderPanel(TemplateView):
+    template_name = 'menu.html'
+
+
+
+
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer

@@ -8,6 +8,10 @@ router.register("food_list", FoodViewSet, basename="food_getlist")
 router.register("order_list", OrderViewSet, basename="order_list")
 
 
+router = DefaultRouter()
+router.register("order_list", OrderViewSet, basename="order_getlist")
+
+
 urlpatterns = [
                   path("", views.IndexView.as_view(), name="index"),
                   path("orders/list/", views.OrdersListView.as_view(), name="orders-list"),
@@ -22,8 +26,6 @@ urlpatterns = [
                   path("food/<int:pk>/delete/", views.foods_delete, name="food-delete"),
                   path('categories/<int:id>/foods/', FoodListByCategory.as_view(), name='food-list-by-category')
               ] + router.urls
-
-
 
 # urlpatterns = [
 #     path('order/', OrderListView.as_view(), name='orders'),

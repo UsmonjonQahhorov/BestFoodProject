@@ -29,7 +29,6 @@ urlpatterns = [
                   path("home/", views.Home.as_view(), name="home"),
                   path("book/", views.BookPanel.as_view(), name="book-panel"),
                   path("about/", views.AboutPanel.as_view(), name="about-panel"),
-                  path("menu/", views.MenuPanel.as_view(), name="menu-panel"),
                   path('adminpanel/', views.AdminPanel.as_view(), name='admin-panel'),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
