@@ -1,0 +1,29 @@
+[
+  {
+    "model": "category.category",
+    "pk": 1,
+    "fields": {
+      "name": "Food",
+      "created_at": "2023-09-09T10:15:58.961Z",
+      "updated_at": "2023-09-09T10:15:58.961Z"
+    }
+  },
+  {
+    "model": "category.category",
+    "pk": 2,
+    "fields": {
+      "name": "Lavash",
+      "created_at": "2023-09-10T09:24:17.980Z",
+      "updated_at": "2023-09-10T09:24:17.980Z"
+    }
+  },
+  {
+    "model": "category.category",
+    "pk": 3,
+    "fields": {
+      "name": "Burger",
+      "created_at": "2023-09-10T09:24:29.631Z",
+      "updated_at": "2023-09-10T09:24:29.631Z"
+    }
+  }
+]

@@ -23,7 +23,7 @@ urlpatterns = [
                   path("food/<int:pk>/detail/", views.FoodsDetailView.as_view(), name="food-detail"),
                   path("food/<int:pk>/update/", views.FoodsUpdateView.as_view(), name="food-update"),
                   path("food/<int:pk>/delete/", views.foods_delete, name="food-delete"),
-                  path('categories/<int:id>/foods/', FoodListByCategory.as_view(), name='food-list-by-category')
+                  path('categories/<int:id>/foods/', views.FoodListByCategory.as_view(), name='food-list-by-category')
               ] + router.urls
 
 # urlpatterns = [
