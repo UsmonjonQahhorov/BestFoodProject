@@ -16,12 +16,13 @@ class UserForm(forms.ModelForm):
         }
 
 class TgUserForm(forms.ModelForm):
-    model = TgUser
-    fields = "__all__"
-    widgets = {
-        "phone_number" : forms.TextInput(attrs={"class":"form"}),
-        "fullname" : forms.TextInput(attrs={"class":"form-control"}),
-        "is_blocked" : forms.TextInput(attrs={"class":"form-control"}),
-        "created_at" : forms.DateInput(attrs={"class":"form-control"}),
-        "updated_at" : forms.DateInput(attrs={"class":"form-control"}),
-    }
+    class Meta:
+        model = TgUser
+        fields = "__all__"
+        widgets = {
+            "phone_number" : forms.TextInput(attrs={"class":"form"}),
+            "fullname" : forms.TextInput(attrs={"class":"form-control"}),
+            "is_blocked" : forms.TextInput(attrs={"class":"form-control"}),
+            "created_at" : forms.DateInput(attrs={"class":"form-control"}),
+            "updated_at" : forms.DateInput(attrs={"class":"form-control"}),
+        }

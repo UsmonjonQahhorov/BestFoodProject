@@ -16,6 +16,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('phone_number', models.CharField(max_length=40)),
+                ('chat_id', models.CharField(default=0, max_length=50)),
+                ('username', models.CharField(max_length=50)),
                 ('fullname', models.CharField(max_length=100)),
                 ('is_blocked', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),

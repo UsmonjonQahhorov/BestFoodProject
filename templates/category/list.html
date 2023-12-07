@@ -1,0 +1,40 @@
+{% extends 'test.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body px-0 pb-0">
+                    <div class="table-responsive">
+                        <table class="table table-flush" >
+                            <form method="get">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-center">
+                                            <input class="form-control" name="search" value="{{ search }}" placeholder="Search..." type="text">
+                                        <th class="text-center">
+                                            <select class="form-control" name="category_id">
+                                                <option value="" {% if not category %}selected{% endif %}>---------</option>
+                                                {% for cat in category %}
+                                                <option value="{{ cat.id }}" {% if category_id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </th>
+                                        <th class="text-center">
+                                            <button type="submit" class="btn bg-gradient-primary btn-sm mb-0">Filter</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </form>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
